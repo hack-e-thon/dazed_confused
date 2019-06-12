@@ -4,7 +4,7 @@ const port=3000;
 const app=express();
 const parser=require('body-parser');
 const mongoose=require('mongoose');
-// const doctors=require('./routes/doctors'); // DoctorRoute path
+const users=require('./routes/users'); // userRoute path
 // const patients=require('./routes/patients'); //Patients path
 // const diagnosis=require('./routes/diagnosis'); //Diagnosis Path
 
@@ -29,7 +29,7 @@ app.use('*',function(req,res,next){
 });
 
 // //List all the routes here
-// app.use('/doctors',doctors);
+app.use('/users',users);
 // app.use('/patients',patients);
 // app.use('/diagnosis',diagnosis);
 
