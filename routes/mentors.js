@@ -38,9 +38,9 @@ router.post('/',function(req,res){
                 res.send("Data Saved").status(201);
             });
         })
-        //Updating the email of mentor with ID , note the path - do it likewise 
-router.put('/:mentorID/update/email',function(req,res){
-    const id = req.params.mentorID;
+        //Updating the email of mentor with Id , note the path - do it likewise 
+router.put('/:mentorId/update/email',function(req,res){
+    const id = req.params.mentorId;
     const newEmail =req.body.email;
     userModel.updateOne({_id:id},{$set:{email:newEmail}})
     .exec()
@@ -48,9 +48,9 @@ router.put('/:mentorID/update/email',function(req,res){
         res.json(data).status(200);
     })
 });
-      //Updating the address of mentor with ID , note the path - do it likewise 
-      router.put('/:mentorID/update/address',function(req,res){
-        const id = req.params.mentorID;
+      //Updating the address of mentor with Id , note the path - do it likewise 
+      router.put('/:mentorId/update/address',function(req,res){
+        const id = req.params.mentorId;
         const newAddress =req.body.address;
         userModel.updateOne({_id:id},{$set:{address:newAddress}})
         .exec()
@@ -61,9 +61,9 @@ router.put('/:mentorID/update/email',function(req,res){
     
     
 
-//deleting the record of one user with ID 
-router.delete('/:mentorID',function(req,res){
-    const id = req.params.mentorID;
+//deleting the record of one user with Id 
+router.delete('/:mentorId',function(req,res){
+    const id = req.params.mentorId;
     mentorModel.deleteOne({_id:id})
     .exec()
     .then(data=>{
