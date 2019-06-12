@@ -5,8 +5,8 @@ const app=express();
 const parser=require('body-parser');
 const mongoose=require('mongoose');
 const users=require('./routes/users'); // userRoute path
-// const patients=require('./routes/patients'); //Patients path
-// const diagnosis=require('./routes/diagnosis'); //Diagnosis Path
+const mentors=require('./routes/mentors'); //Mentors path
+
 
 app.use(morgan('dev'));
 app.use(parser.json());
@@ -30,8 +30,7 @@ app.use('*',function(req,res,next){
 
 // //List all the routes here
 app.use('/users',users);
-// app.use('/patients',patients);
-// app.use('/diagnosis',diagnosis);
+app.use('/mentors',mentors);
 
 
 app.listen(port,function(){
