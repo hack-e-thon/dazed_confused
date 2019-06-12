@@ -1,12 +1,12 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const appointModel=require('../models/appointmentModel');
+const appointmentModel=require('../models/appointmentModel');
 
 
-router.post('/userId',function(req,res){
+router.post('/:userId',function(req,res){
 
-    appointModel.find({userId:req.param.userId,status:false})
+    appointmentModel.find({userId:req.param.userId,status:false})
     .exec()
     .then(appointment=>{
         if(appointment.length>0)
@@ -37,10 +37,10 @@ router.post('/userId',function(req,res){
     
 })
 
-router.put('/appointmentId',function(req,res){
+router.put('/:appointmentId',function(req,res){
     const appointmentId=req.param.appointmentId;
     const status=true
-    appointModel.updateOne({_id:appointmentId},{$set:{status:status}})
+    appointmentModel.updateOne({_id:appointmentId},{$set:{status:status}})
     .exec()
     .then(appointment=>{
       res.send(appointment).status(202);  
@@ -49,7 +49,7 @@ router.put('/appointmentId',function(req,res){
 
 
 router.get('/mentor/:mentorId',function(req,res){
-    appointModel.find({mentorId:req.param.mentorId})
+    appointmentModel.find({mentorId:req.param.mentorId})
     .exec()
     .then(appointment=>{
         res.json(appointment).status(200)
@@ -57,9 +57,10 @@ router.get('/mentor/:mentorId',function(req,res){
 })
 
 router.get('/user/:userId',function(req,res){
-    appointModel.find({userId:req.param.userId})
+    appointmentModel.find({userId:req.param.userId})
     .exec()
     .then(appointment=>{
         res.json(appointment).status(200)
     })
 })
+module.exports=router

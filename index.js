@@ -6,6 +6,7 @@ const parser=require('body-parser');
 const mongoose=require('mongoose');
 const users=require('./routes/users'); // userRoute path
 const mentors=require('./routes/mentors'); //Mentors path
+const appointment=require('./routes/appointment'); //Mentors path
 
 
 app.use(morgan('dev'));
@@ -31,6 +32,7 @@ app.use('*',function(req,res,next){
 // //List all the routes here
 app.use('/users',users);
 app.use('/mentors',mentors);
+app.use('/appointment',appointment);
 
 
 app.listen(port,function(){
