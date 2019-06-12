@@ -12,7 +12,8 @@ const mentorSchema= mongoose.Schema({
     address: {type:String,required:true},
     qualification: {type:String},
     rating:{type:Number,default:0},
-    appointmentId: {type:Array}
+    timeSlots:{type:[Date]}
+    
 });
 
 module.exports=mongoose.model('mentor',mentorSchema);

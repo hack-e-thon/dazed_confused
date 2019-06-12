@@ -4,18 +4,22 @@ const mongoose=require('mongoose');
 const userModel=require('../models/userModel');
 //const bcryptjs = require('bcryptjs'); // Encryption
 
-router.get('/',function(req,res){
+router.get('/:userId',function(req,res){
     // res.send("User's Home").status(200);
-    userModel.find()
+    const id=req.param.userId
+    userModel.find({_id:id})
     .exec()
     .then(userData=>{
     
         res.json(userData).status(200)
     })
 });
+
+
    
 
 router.post('/',function(req,res){
+
     const newData= new userModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
@@ -28,16 +32,20 @@ router.post('/',function(req,res){
         contact: req.body.contact,
         stage: req.body.stage
     });
-  
-    
-            newData.save(function(err){
-                if(err)
-                res.send(err).status(400);
-                else
-                res.send("Data Saved").status(201);
-            });
-        })
-        //Updating the email of user with Id , note the path - do it likewise 
+    userModel.find({email:req.body.email})
+.exec()
+.then(users=>{
+    if(users.length>0){
+        res.send("User already exists").status(400);
+    }
+    else{
+        newData.save();
+        res.send("User created successfully").status(201);
+    }
+})
+})
+      
+//Updating the email of user with Id , note the path - do it likewise 
 router.put('/:userId/update/email',function(req,res){
     const id = req.params.userId;
     const newEmail =req.body.email;
