@@ -1,6 +1,6 @@
 const mongoose =require('mongoose')
 
-const appoinmentSchema=mongoose.Schema(
+const appointmentSchema=mongoose.Schema(
     {
         _id:mongoose.Schema.Types.ObjectId,
         userId:{
@@ -14,7 +14,7 @@ const appoinmentSchema=mongoose.Schema(
             required:true
         },
         timeSlot:{
-            type:String,
+            type:Date,
             required:true
         },
         status:{
@@ -22,6 +22,5 @@ const appoinmentSchema=mongoose.Schema(
             default:false,
         }
     },
-
-
 )
+module.exports=mongoose.model('appointment',appointmentSchema)

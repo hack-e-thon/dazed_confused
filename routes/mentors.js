@@ -27,7 +27,7 @@ router.post('/',function(req,res){
         gender: req.body.gender,
         contact: req.body.contact,
         qualification: req.body.qualification,
-        rating: req.body.rating
+        appointment:req.body.appointment
     });
   
     

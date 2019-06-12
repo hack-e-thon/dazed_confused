@@ -14,7 +14,7 @@ router.post('/:userId',function(req,res){
             res.send("Already an appointment is pending").status(403);
         }
         else{
-            const newAppointment=new appointModel({
+            const newAppointment=new appointmentModel({
                 _id: new mongoose.Types.ObjectId(),
                 userId: req.body.userId,
                 mentorId:req.body.mentorId,
