@@ -4,8 +4,9 @@ const mongoose=require('mongoose');
 const mentorModel=require('../models/mentorModel');
 //const bcryptjs = require('bcryptjs'); // Encryption
 
-router.get('/getmentor/:mentorId',function(req,res){
-    const id=req.param.mentorId;
+router.get('/getmentor',function(req,res){
+    
+    const id=req.body.mentorId;
     mentorModel.find({_id:id})
     .exec()
     .then(mentor=>{
@@ -13,13 +14,14 @@ router.get('/getmentor/:mentorId',function(req,res){
     })
 })
 
-router.get('/timeSlot/:timeSlots',function(req,res){
+router.get('/timeSlot',function(req,res){
     // res.send("mentor's Home").status(200);
-    const timeSlot=req.param.timeSlots
+
+    const timeSlot=req.body.timeSlot
     mentorModel.find({timeSlots:timeSlot})
     .exec()
     .then(mentorData=>{
-        res.json(mentorData._id).status(200)
+        res.json(mentorData).status(200)
     })
 });
    
@@ -32,13 +34,10 @@ router.put('/newtimeslot/:mentorId/:timeSlot',function(req,res){
     .then(mentor=>{
         res.send("Success").status(200);
     })
-
 })
 
 
 router.post('/',function(req,res){
-
-
 
     const newData= new mentorModel({
         _id: new mongoose.Types.ObjectId(),

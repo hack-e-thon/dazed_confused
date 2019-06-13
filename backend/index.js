@@ -6,7 +6,7 @@ const parser=require('body-parser');
 const mongoose=require('mongoose');
 const users=require('./routes/users'); // userRoute path
 const mentors=require('./routes/mentors'); //Mentors path
-const appointment=require('./routes/appointment'); //Mentors path
+const appointments=require('./routes/appointments'); //Mentors path
 
 
 app.use(morgan('dev'));
@@ -32,9 +32,13 @@ app.use('*',function(req,res,next){
 // //List all the routes here
 app.use('/users',users);
 app.use('/mentors',mentors);
-app.use('/appointment',appointment);
+app.use('/appointments',appointments);
 
+app.get('/',function(req,res){
+    res.send("connection working").status(200)
+})
 
 app.listen(port,function(){
+    
     console.log(`Server Listining on ${port}`);
 });

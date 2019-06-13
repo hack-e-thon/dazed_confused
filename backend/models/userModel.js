@@ -10,8 +10,7 @@ const userSchema= mongoose.Schema({
     gender: {type:String,required:true},
     contact: {type:Number,required:true},
     address: {type:String,required:true},
-    stage: {type:String},
-    appointments:{type:Date}
+    stage: {type:String,default:'stage0'},
 
 });
 

@@ -4,9 +4,9 @@ const mongoose=require('mongoose');
 const appointmentModel=require('../models/appointmentModel');
 
 
-router.post('/:userId',function(req,res){
-
-    appointmentModel.find({userId:req.param.userId,status:false})
+router.post('/',function(req,res){
+    const userId=req.body.userId
+    appointmentModel.find({userId:userId,status:false})
     .exec()
     .then(appointment=>{
         if(appointment.length>0)
@@ -19,7 +19,6 @@ router.post('/:userId',function(req,res){
                 userId: req.body.userId,
                 mentorId:req.body.mentorId,
                 timeSlot:req.body.timeSlot,
-                status:req.body.status
             })
             newAppointment.save(function(err){
                 if(err)
@@ -33,12 +32,10 @@ router.post('/:userId',function(req,res){
         }
         
     })
-
-    
 })
 
-router.put('/:appointmentId',function(req,res){
-    const appointmentId=req.param.appointmentId;
+router.put('/changeStatus',function(req,res){
+    const appointmentId=req.body.appointmentId;
     const status=true
     appointmentModel.updateOne({_id:appointmentId},{$set:{status:status}})
     .exec()
@@ -48,16 +45,29 @@ router.put('/:appointmentId',function(req,res){
 })
 
 
-router.get('/mentor/:mentorId',function(req,res){
-    appointmentModel.find({mentorId:req.param.mentorId})
+router.get('/mentorsRequestList',function(req,res){
+    const mentorId=req.body.mentorId
+    appointmentModel.find({mentorId:mentorId,status:false})
     .exec()
     .then(appointment=>{
         res.json(appointment).status(200)
     })
 })
 
-router.get('/user/:userId',function(req,res){
-    appointmentModel.find({userId:req.param.userId})
+router.get('/mentorList',function(req,res){
+    const mentorId=req.body.mentorId
+    appointmentModel.find({mentorId:mentorId})
+    .exec()
+    .then(appointment=>{
+        res.json(appointment).status(200)
+    })
+})
+
+
+
+router.get('/user',function(req,res){
+    const userId=req.body.userId
+    appointmentModel.find({userId:userId})
     .exec()
     .then(appointment=>{
         res.json(appointment).status(200)

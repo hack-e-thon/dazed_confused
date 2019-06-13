@@ -4,6 +4,13 @@ const mongoose=require('mongoose');
 const userModel=require('../models/userModel');
 //const bcryptjs = require('bcryptjs'); // Encryption
 
+
+
+
+// router.get('/'),function(req,res){
+
+// }
+
 router.get('/:userId',function(req,res){
     // res.send("User's Home").status(200);
     const id=req.param.userId
