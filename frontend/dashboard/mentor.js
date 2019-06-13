@@ -6,7 +6,7 @@
 // axios({
 //     method:'get',
 //     url:'http://localhost:3000/getMentor',
-//     body:{
+//     data:{
 //         mentorId=mentorId
 //     }
 // })
@@ -20,7 +20,7 @@
 // axios({
 //     method:'get',
 //     url:'http://localhost:3000/appointments/mentorList',
-//     body:{
+//     data:{
 //         mentorId:mentorId
 //     }
 // })
@@ -34,7 +34,7 @@
 // axios({
 //     method:'get',
 //     url:'http://localhost:3000/appointments/mentorsRequestList',
-//     body:{
+//     data:{
 //         mentorId:mentorId
 //     }
 // })
@@ -56,7 +56,7 @@
 // axios({
 //     method:'put',
 //     url:'http://localhost:3000/appointments/changeStatus',
-//     body:{
+//     data:{
 //         appointmentId:appointmentId
 //     }
 // })
@@ -73,7 +73,7 @@
 // axios({
 //     method:'put',
 //     url:'http://localhost:3000/users/stageUpdate',
-//     body:{
+//     data:{
 //         userId:userId,
 //         stage:newStage
 //     }
@@ -83,19 +83,3 @@ var email='user1@gmail.com'
 var password='user1'
 var token
 var userId
-axios({
-    method:'post',
-    url:'http://localhost:3000/users/login',
-    data:{
-        email:email,
-        password:password
-    }
-})
-.then(function(response){
-    console.log(response.data.message)
-    token=response.data.token
-    userId=response.data.userId
-    console.log(token)
-    console.log(userId)
-    
-})

@@ -16,20 +16,22 @@ axios({
 
 axios({
     method:'post',
-    url:'http:/loaclhost:3000/login',
-    //headers:{Autorization:'Beare' + token},
-    data :{
-        emailId:emailId,
-        password: password
+    url:'http://localhost:3000/mentors/login',
+    headers:{Autorization:'Beare' + token},
+    data:{
+        email:email,
+        password:password
     }
 })
-.then(function(res){
-    console.log(res)
+.then(function(response){
+    console.log(response.data.message)
+    token=response.data.token
+    userId=response.data.userId
+    console.log(token)
+    console.log(userId)
+    
 })
-.catch(function(err)
-{
-    console.log(err)
-})
+
 
 axios({
     method:'post',

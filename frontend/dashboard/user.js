@@ -5,7 +5,10 @@ var mentorsAvailable
 var mentorChoosen
 axios({
     method:'get',
-    url:'http://localhost:3000/users/'+userId,
+    url:'http://localhost:3000/users/getuser',
+    data:{
+        userId:userId
+    }
     
 })
 .then(function(res){
@@ -19,7 +22,7 @@ var timeSlot;
 axios({
     method:'get',
     url:'http://localhost:3000/mentors/timeSlot',
-    body:{
+    data:{
         timeSlot:timeSlot
     }
 })
@@ -35,7 +38,7 @@ axios({
 axios({
     method:'post',
     url:"http://localhost:3000/appointments/",
-    body:{
+    data:{
         userId:userId,
         timeSlot:timeSlot,
         mentorId:mentorChoosen
@@ -52,7 +55,7 @@ var rating
 axios({
     method:'put',
     url:"http://localhost:3000/appointments/giveRating",
-    body:{
+    data:{
         appointmentId:appointmentId,
         rating:rating
     }
