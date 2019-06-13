@@ -34,9 +34,9 @@ app.use('/users',users);
 app.use('/mentors',mentors);
 app.use('/appointments',appointments);
 
-app.get('/',function(req,res){
-    res.send("connection working").status(200)
-})
+// app.get('/',function(req,res){
+//     res.send("connection working").status(200)
+// })
 
 app.listen(port,function(){
     

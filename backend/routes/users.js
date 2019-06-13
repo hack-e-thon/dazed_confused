@@ -104,7 +104,7 @@ router.delete('/:userId',function(req,res){
 
 router.post('/login',function(req,res){
     console.log("reaching")
-    console.log(req)
+    
     userModel.findOne({email:req.body.email})
     .exec()
     .then(user=>{
@@ -116,7 +116,7 @@ router.post('/login',function(req,res){
             {
                 const token=jwt.sign({
                     email:user.email,
-                    _is:user.id
+                    _id:user.id
                 },'secret',
                 {
                     expiresIn: '24h'
