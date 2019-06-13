@@ -78,3 +78,15 @@ axios({
         stage:newStage
     }
 })
+
+
+
+axios({
+    method:'post',
+    url:'http://localhost:3000/users/login',
+    
+    body:{
+        email:email,
+        password:password
+    }
+})

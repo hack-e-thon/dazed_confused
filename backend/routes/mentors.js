@@ -2,7 +2,8 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const mentorModel=require('../models/mentorModel');
-//const bcryptjs = require('bcryptjs'); // Encryption
+const bcryptjs = require('bcryptjs'); // Encryption
+const jwt=require('jsonwebtoken');
 
 router.get('/getmentor',function(req,res){
     

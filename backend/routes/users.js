@@ -2,8 +2,8 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const userModel=require('../models/userModel');
-//const bcryptjs = require('bcryptjs'); // Encryption
-
+const bcryptjs = require('bcryptjs'); // Encryption
+const jwt=require('jsonwebtoken');
 
 
 
@@ -33,7 +33,7 @@ router.post('/',function(req,res){
         name :req.body.name,
         age: req.body.age,
         email: req.body.email,
-        password: req.body.password,
+        password:bcryptjs.hashSync(req.body.password,10),
         address: req.body.address,
         city: req.body.city,
         gender: req.body.gender,
@@ -103,6 +103,7 @@ router.delete('/:userId',function(req,res){
 
 
 router.post('/login',function(req,res){
+    console.log("reaching")
     userModel.findOne({email:req.body.email})
     .exec()
     .then(user=>{
@@ -117,7 +118,7 @@ router.post('/login',function(req,res){
                     _is:user.id
                 },'secret',
                 {
-                    expiresIn: '1h'
+                    expiresIn: '24h'
                 })
                 res.json({
                     "message":"Auth Successful",
