@@ -95,27 +95,60 @@ router.post('/login',function(req,res){
     })
 })
 
-//Updating the email of mentor with Id , note the path - do it likewise 
-router.put('/:mentorId/update/email',function(req,res){
-    const id = req.params.mentorId;
+//Updating the email of user with Id , note the path - do it likewise 
+router.put('/updateEmail',function(req,res){
+    const id = req.body.mentorId;
     const newEmail =req.body.email;
-    userModel.updateOne({_id:id},{$set:{email:newEmail}})
+    mentorModel.updateOne({_id:id},{$set:{email:newEmail}})
     .exec()
     .then(data=>{
         res.json(data).status(200);
     })
 });
       //Updating the address of mentor with Id , note the path - do it likewise 
-      router.put('/:mentorId/update/address',function(req,res){
-        const id = req.params.mentorId;
+      router.put('/updateAddress',function(req,res){
+        const id = req.body.mentorId;
         const newAddress =req.body.address;
-        userModel.updateOne({_id:id},{$set:{address:newAddress}})
+        mentorModel.updateOne({_id:id},{$set:{address:newAddress}})
         .exec()
         .then(data=>{
             res.json(data).status(200);
         })
     });
     
+      //Updating the qualification of user with Id , note the path - do it likewise 
+      router.put('/updateQualification',function(req,res){
+        const id = req.body.mentorId;
+        const newQualifaction =req.body.qualifaction;
+        mentorModel.updateOne({_id:id},{$set:{qualification:newQualifaction}})
+        .exec()
+        .then(data=>{
+            res.json(data).status(200);
+        })
+    });
+
+     //Updating the password of user with Id , note the path - do it likewise 
+     router.put('/updatePassword',function(req,res){
+        const id = req.body.mentorId;
+        const newPassword =req.body.password;
+        mentorModel.updateOne({_id:id},{$set:{password:newPassword}})
+        .exec()
+        .then(data=>{
+            res.json(data).status(200);
+        })
+    });
+    
+    
+       //Updating the address of user with Id , note the path - do it likewise 
+       router.put('/updateContact',function(req,res){
+        const id = req.body.mentorId;
+        const newContact =req.body.contact;
+        mentorModel.updateOne({_id:id},{$set:{contact:newContact}})
+        .exec()
+        .then(data=>{
+            res.json(data).status(200);
+        })
+    });
     
 
 //deleting the record of one user with Id 
