@@ -26,9 +26,9 @@ router.get('/timeSlot',function(req,res){
 });
    
 
-router.put('/newtimeslot/:mentorId/:timeSlot',function(req,res){
-    const id=req.param.mentorId
-    const time=req.param.timeSlot
+router.put('/newtimeslot',function(req,res){
+    const id=req.body.mentorId
+    const time=req.body.timeSlot
     mentorModel.updateOne({_id:id},{$push:{timeSlots:time}})
     .exec()
     .then(mentor=>{
@@ -63,7 +63,38 @@ router.post('/',function(req,res){
         }
     })
 })
-        //Updating the email of mentor with Id , note the path - do it likewise 
+//  
+router.post('/login',function(req,res){
+    mentorModel.findOne({email:req.body.email})
+    .exec()
+    .then(mentor=>{
+        if(mentor==null)
+        res.send("Auth failed").status(401);
+        else
+        {
+            if(bcryptjs.compareSync(req.body.password,user.password) )
+            {
+                const token=jwt.sign({
+                    email:user.email,
+                    _id:user.id
+                },'secret',
+                {
+                    expiresIn: '24h'
+                })
+                res.json({
+                    "message":"Auth Successful",
+                    "token":token
+                }).status(200);
+            }
+            else{
+                releaseEvents.send("Auth Failed").status(401);
+            }
+        }
+        
+    })
+})
+
+//Updating the email of mentor with Id , note the path - do it likewise 
 router.put('/:mentorId/update/email',function(req,res){
     const id = req.params.mentorId;
     const newEmail =req.body.email;

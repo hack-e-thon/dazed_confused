@@ -11,9 +11,10 @@ const userModel=require('../models/userModel');
 
 // }
 
-router.get('/:userId',function(req,res){
+router.get('/getuser',function(req,res){
     // res.send("User's Home").status(200);
-    const id=req.param.userId
+    const id=req.body.userId
+    console.log(id)
     userModel.find({_id:id})
     .exec()
     .then(userData=>{
@@ -99,6 +100,37 @@ router.delete('/:userId',function(req,res){
         res.json(data).status(200);
     })
 });
+
+
+router.post('/login',function(req,res){
+    userModel.findOne({email:req.body.email})
+    .exec()
+    .then(user=>{
+        if(user==null)
+        res.send("Auth failed").status(401);
+        else
+        {
+            if(bcryptjs.compareSync(req.body.password,user.password) )
+            {
+                const token=jwt.sign({
+                    email:user.email,
+                    _is:user.id
+                },'secret',
+                {
+                    expiresIn: '1h'
+                })
+                res.json({
+                    "message":"Auth Successful",
+                    "token":token
+                }).status(200);
+            }
+            else{
+                releaseEvents.send("Auth Failed").status(401);
+            }
+        }
+        
+    })
+})
 
 
 

@@ -8,7 +8,6 @@ const users=require('./routes/users'); // userRoute path
 const mentors=require('./routes/mentors'); //Mentors path
 const appointments=require('./routes/appointments'); //Mentors path
 
-
 app.use(morgan('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));

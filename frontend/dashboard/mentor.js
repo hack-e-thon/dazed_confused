@@ -45,6 +45,13 @@ axios({
     console.log(err)
 })
 
+axios({
+    ethod:'put',
+    url:'http://localhost:3000/mentors/'
+})
+
+
+
 var appointmentId
 axios({
     method:'put',

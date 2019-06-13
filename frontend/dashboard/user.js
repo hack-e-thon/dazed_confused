@@ -18,7 +18,7 @@ axios({
 var timeSlot;
 axios({
     method:'get',
-    url:'http://localhost:3000/timeSlot',
+    url:'http://localhost:3000/mentors/timeSlot',
     body:{
         timeSlot:timeSlot
     }
