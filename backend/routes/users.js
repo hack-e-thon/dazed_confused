@@ -104,11 +104,12 @@ router.delete('/:userId',function(req,res){
 
 router.post('/login',function(req,res){
     console.log("reaching")
+    console.log(req)
     userModel.findOne({email:req.body.email})
     .exec()
     .then(user=>{
         if(user==null)
-        res.send("Auth failed").status(401);
+        res.send("Auth failed").status(400);
         else
         {
             if(bcryptjs.compareSync(req.body.password,user.password) )
@@ -122,6 +123,7 @@ router.post('/login',function(req,res){
                 })
                 res.json({
                     "message":"Auth Successful",
+                    "userId":user._id,
                     "token":token
                 }).status(200);
             }
