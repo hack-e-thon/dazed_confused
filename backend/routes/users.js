@@ -79,8 +79,8 @@ router.put('/updateEmail',function(req,res){
     })
 });
       //Updating the address of user with Id , note the path - do it likewise 
-      router.put('/:userId/update/address',function(req,res){
-        const id = req.params.userId;
+      router.put('/updateAddress',function(req,res){
+        const id = req.body.userId;
         const newAddress =req.body.address;
         userModel.updateOne({_id:id},{$set:{address:newAddress}})
         .exec()
@@ -88,9 +88,29 @@ router.put('/updateEmail',function(req,res){
             res.json(data).status(200);
         })
     });
-    
-    
 
+       //Updating the address of user with Id , note the path - do it likewise 
+       router.put('/updateContact',function(req,res){
+        const id = req.body.userId;
+        const newContact =req.body.contact;
+        userModel.updateOne({_id:id},{$set:{contact:newContact}})
+        .exec()
+        .then(data=>{
+            res.json(data).status(200);
+        })
+    });
+    
+          //Updating the password of user with Id , note the path - do it likewise 
+          router.put('/updatePassword',function(req,res){
+            const id = req.body.userId;
+            const newPassword =req.body.password;
+            userModel.updateOne({_id:id},{$set:{password:newPassword}})
+            .exec()
+            .then(data=>{
+                res.json(data).status(200);
+            })
+        });
+        
 //deleting the record of one user with Id 
 router.delete('/:userId',function(req,res){
     const id = req.params.userId;
