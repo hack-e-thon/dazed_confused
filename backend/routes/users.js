@@ -69,8 +69,8 @@ router.put('/stageUpdate',function(req,res){
 
 
 //Updating the email of user with Id , note the path - do it likewise 
-router.put('/:userId/update/email',function(req,res){
-    const id = req.params.userId;
+router.put('/updateEmail',function(req,res){
+    const id = req.body.userId;
     const newEmail =req.body.email;
     userModel.updateOne({_id:id},{$set:{email:newEmail}})
     .exec()
