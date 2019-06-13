@@ -20,6 +20,9 @@ const appointmentSchema=mongoose.Schema(
         status:{
             type:Boolean,
             default:false,
+        },
+        rating:{
+            type:Number
         }
     },
 )

@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const appointmentModel=require('../models/appointmentModel');
-
+const mentorModel=require('../models/mentorModel')
 
 router.post('/',function(req,res){
     const userId=req.body.userId
@@ -42,6 +42,9 @@ router.put('/changeStatus',function(req,res){
     .then(appointment=>{
       res.send(appointment).status(202);  
     })
+    .catch(err=>{
+        res.send(err)
+    })
 })
 
 
@@ -52,6 +55,9 @@ router.get('/mentorsRequestList',function(req,res){
     .then(appointment=>{
         res.json(appointment).status(200)
     })
+    .catch(err=>{
+        res.send(err)
+    })
 })
 
 router.get('/mentorList',function(req,res){
@@ -61,9 +67,35 @@ router.get('/mentorList',function(req,res){
     .then(appointment=>{
         res.json(appointment).status(200)
     })
+    .catch(err=>{
+        res.send(err)
+    })
 })
 
+router.put('/giveRating',function(req,res){
+    const rating=req.body.rating
+    const id=req.body.appointmentId
+    appointmentModel.updateOne({_id:id},{$set:{rating:rating}})
+    .exec()
+    .then(appointment=>{
+        res.json(appointment).status(200)
+        
+        const mentorId=appointment.mentorId
+        const totalusers=appointmentModel.find({mentorId:mentorId,rating:{ $exists:true }}).count()
 
+        const oldRating=mentorModel.findOne({_id:mentorId}).rating
+        const totalRating=(totalusers-1)*oldRating;
+            const newRating=(totalRating+rating)/totalusers;
+            mentorModel.updateOne({_id:mentorId},{$set:{rating:newRating}})
+            .exec()
+            .then(update=>{
+                res.send("ratings updated").status(200)
+            })
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
 
 router.get('/user',function(req,res){
     const userId=req.body.userId
@@ -71,6 +103,9 @@ router.get('/user',function(req,res){
     .exec()
     .then(appointment=>{
         res.json(appointment).status(200)
+    })
+    .catch(err=>{
+        res.send(err)
     })
 })
 module.exports=router

@@ -59,3 +59,15 @@ axios({
 .catch(function(err){
     console.log(err)
 })
+
+
+var stageUpdate
+var newStage
+axios({
+    method:'put',
+    url:'http://localhost:3000/users/stageUpdate',
+    body:{
+        userId:userId,
+        stage:newStage
+    }
+})

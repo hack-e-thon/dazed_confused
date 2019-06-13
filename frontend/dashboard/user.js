@@ -47,3 +47,19 @@ axios({
 .catch(function(err){
     console.log(err)
 })
+
+var rating
+axios({
+    method:'put',
+    url:"http://localhost:3000/appointments/giveRating",
+    body:{
+        appointmentId:appointmentId,
+        rating:rating
+    }
+})
+.then(function(res){
+    console.log(res)
+})
+.catch(function(err){
+    console.log(err)
+})

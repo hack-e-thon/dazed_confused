@@ -52,6 +52,21 @@ router.post('/',function(req,res){
 })
 })
       
+router.put('/stageUpdate',function(req,res){
+    const newStage=req.body.stage
+    const userId=req.body.userId
+    userModel.updateOne({_id:userId},{$set:{stage:newStage}})
+    .exec()
+    .then(updatedStage=>{
+        res.send(updatedStage).status(200)
+    })
+    .catch(err=>{
+        res.send(err).status(400)
+    })
+})
+
+
+
 //Updating the email of user with Id , note the path - do it likewise 
 router.put('/:userId/update/email',function(req,res){
     const id = req.params.userId;

@@ -11,7 +11,7 @@ const mentorSchema= mongoose.Schema({
     contact: {type:Number,required:true},
     address: {type:String,required:true},
     qualification: {type:String},
-    rating:{type:Number,default:0},
+    rating:{type:Number},
     timeSlots:{type:[Date]}
     
 });
