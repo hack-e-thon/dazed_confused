@@ -11,10 +11,10 @@ const jwt=require('jsonwebtoken');
 
 // }
 
-router.get('/getuser',function(req,res){
-    // res.send("User's Home").status(200);
+router.post('/getuser',function(req,res){
+    // s.send("User's Home").status(200);
     const id=req.body.userId
-    console.log(id)
+    console.log("asd",req.body)
     userModel.find({_id:id})
     .exec()
     .then(userData=>{
@@ -28,6 +28,7 @@ router.get('/getuser',function(req,res){
 
 router.post('/',function(req,res){
 
+    console.log(req)
     const newData= new userModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
@@ -123,7 +124,7 @@ router.delete('/:userId',function(req,res){
 
 
 router.post('/login',function(req,res){
-    console.log("reaching")
+    console.log("hello",req)
     
     userModel.findOne({email:req.body.email})
     .exec()
@@ -148,7 +149,7 @@ router.post('/login',function(req,res){
                 }).status(200);
             }
             else{
-                releaseEvents.send("Auth Failed").status(401);
+                releaseEvents.send("Auth failed").status(401);
             }
         }
         

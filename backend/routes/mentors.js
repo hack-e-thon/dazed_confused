@@ -5,7 +5,7 @@ const mentorModel=require('../models/mentorModel');
 const bcryptjs = require('bcryptjs'); // Encryption
 const jwt=require('jsonwebtoken');
 
-router.get('/getmentor',function(req,res){
+router.post('/getmentor',function(req,res){
     
     const id=req.body.mentorId;
     mentorModel.find({_id:id})
@@ -15,10 +15,11 @@ router.get('/getmentor',function(req,res){
     })
 })
 
-router.get('/timeSlot',function(req,res){
+router.post('/timeSlot',function(req,res){
     // res.send("mentor's Home").status(200);
 
     const timeSlot=req.body.timeSlot
+    console.log(timeSlot)
     mentorModel.find({timeSlots:timeSlot})
     .exec()
     .then(mentorData=>{
@@ -43,14 +44,14 @@ router.post('/',function(req,res){
     const newData= new mentorModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
-        age: req.body.age,
+        //age: req.body.age,
         email: req.body.email,
-        password: req.body.password,
+        password:bcryptjs.hashSync(req.body.password,10),
         address: req.body.address,
-        city: req.body.city,
-        gender: req.body.gender,
+        //city: req.body.city,
+        //gender: req.body.gender,
         contact: req.body.contact,
-        qualification: req.body.qualification
+        //qualification: req.body.qualification
     });
     mentorModel.find({email:req.body.email})
     .exec()
@@ -73,11 +74,11 @@ router.post('/login',function(req,res){
         res.send("Auth failed").status(401);
         else
         {
-            if(bcryptjs.compareSync(req.body.password,user.password) )
+            if(bcryptjs.compareSync(req.body.password,mentor.password) )
             {
                 const token=jwt.sign({
-                    email:user.email,
-                    _id:user.id
+                    email:mentor.email,
+                    _id:mentor.id
                 },'secret',
                 {
                     expiresIn: '24h'
@@ -88,7 +89,7 @@ router.post('/login',function(req,res){
                 }).status(200);
             }
             else{
-                releaseEvents.send("Auth Failed").status(401);
+                res.send("Auth Failed").status(401);
             }
         }
         

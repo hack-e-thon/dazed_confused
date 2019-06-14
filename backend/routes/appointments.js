@@ -48,7 +48,7 @@ router.put('/changeStatus',function(req,res){
 })
 
 
-router.get('/mentorsRequestList',function(req,res){
+router.post('/mentorsRequestList',function(req,res){
     const mentorId=req.body.mentorId
     appointmentModel.find({mentorId:mentorId,status:false})
     .exec()
@@ -60,7 +60,7 @@ router.get('/mentorsRequestList',function(req,res){
     })
 })
 
-router.get('/mentorList',function(req,res){
+router.post('/mentorList',function(req,res){
     const mentorId=req.body.mentorId
     appointmentModel.find({mentorId:mentorId})
     .exec()
@@ -97,7 +97,7 @@ router.put('/giveRating',function(req,res){
     })
 })
 
-router.get('/user',function(req,res){
+router.post('/user',function(req,res){
     const userId=req.body.userId
     appointmentModel.find({userId:userId})
     .exec()

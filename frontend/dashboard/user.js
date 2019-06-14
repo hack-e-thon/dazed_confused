@@ -51,7 +51,8 @@ var timeSlot;
 //     console.log(err)
 // })
 
-console.log("zxc",userId)
+var token=localStorage.getItem("token")
+// console.log("zxc",userId)
 console.log(token)
 
 // var rating=4

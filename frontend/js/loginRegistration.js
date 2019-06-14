@@ -30,7 +30,7 @@ if(loginusertype===1)
        if(response.data!=="Auth failed")
        {
         //console.log(response)
-        assigntoken(response.data.token)
+        localStorage.setItem("token",response.data.token)
         //userId=response.data.userId
         //console.log(token)
         //console.log(userId)
@@ -47,8 +47,6 @@ if(loginusertype===1)
    .catch(function(err){
        console.log("asd",err)
    })
-   
-
    
 }
 // else if(loginusertype===2)
