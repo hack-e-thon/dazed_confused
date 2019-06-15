@@ -55,16 +55,18 @@ axios({
 })
 .then(function(res){
     console.log("asdasdasd",res)
-
-    userList.foreach(element => {
+    var userList=res.data;
+    userList.forEach(element => {
         axios({
             method:"post",
             url:"http://localhost:3000/users/getuser",
-            userId:element.userId
+            data:{
+                userId:element.userId
+            }
         })
         .then(res=>{
-            console.log(res)
-            let li=document.createElement("li").appendChild(document.createTextNode(res.name))
+            console.log("zxc",res)
+            let li=document.createElement("li").appendChild(document.createTextNode(res.data.name))
         document.getElementById("ul_appointments").appendChild(li)    
         })
 
