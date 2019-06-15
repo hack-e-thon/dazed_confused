@@ -47,18 +47,31 @@ axios({
 var userList;
 
 axios({
-    method:'get',
+    method:'post',
     url:'http://localhost:3000/appointments/mentorList',
     data:{
-        mentorId:mentorId
+        mentorId:localStorage.getItem("mentorId")
     }
 })
 .then(function(res){
-    usersList=res.body
-    userList.forEach(element => {
-        let ul=document.getElementById("ul_appointments")
-        documen
+    console.log("asdasdasd",res)
+
+    userList.foreach(element => {
+        axios({
+            method:"post",
+            url:"http://localhost:3000/users/getuser",
+            userId:element.userId
+        })
+        .then(res=>{
+            console.log(res)
+            let li=document.createElement("li").appendChild(document.createTextNode(res.name))
+        document.getElementById("ul_appointments").appendChild(li)    
+        })
+
+
+        
     });
+
 })
 .catch(function(err){
     console.log(err)

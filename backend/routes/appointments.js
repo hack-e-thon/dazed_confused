@@ -61,11 +61,12 @@ router.post('/mentorsRequestList',function(req,res){
 })
 
 router.post('/mentorList',function(req,res){
+    console.log("asdasd",req.body)
     const mentorId=req.body.mentorId
     appointmentModel.find({mentorId:mentorId})
     .exec()
     .then(appointment=>{
-        res.json(appointment).status(200)
+        res.send(appointment).status(200)
     })
     .catch(err=>{
         res.send(err)
