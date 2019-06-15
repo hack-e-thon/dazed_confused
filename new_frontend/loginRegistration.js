@@ -1,4 +1,4 @@
-    
+
 function signup()
 {
     var name=document.forms["signupform"]["name"].value;
@@ -86,12 +86,12 @@ function login()
         
         .then(function(response){
         //x=response;
-                console.log(response)
+                console.log("asdf",response)
                // alert("then")
                 if(response.data!=="Auth failed")
                 {
                     
-                    console.log("asd");
+                    console.log(response);
                     localStorage.setItem("token",response.data.token);
                     localStorage.setItem("userId",response.data.userId)
                 
@@ -103,10 +103,13 @@ function login()
                 }
                 else
                 {
-                    alert("asdasd")
+                    alert("Please Enter Valid Credentials")
                     //when auth fails
                     console.log("failed")
                 }
+        })
+        .catch(err=>{
+            console.log("zxcvzxvc",err)
         })
         
     }
@@ -143,7 +146,7 @@ function login()
                 }
                 else
                 {
-                    alert("asdasd")
+                    alert("Please Enter Valid Credentials")
                     //when auth fails
                     console.log("failed")
                 }

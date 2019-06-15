@@ -149,7 +149,7 @@ router.post('/login',function(req,res){
                 }).status(200);
             }
             else{
-                releaseEvents.send("Auth failed").status(401);
+                res.send("Auth failed").status(401);
             }
         }
         

@@ -125,7 +125,7 @@ router.post('/login',function(req,res){
                 }).status(200);
             }
             else{
-                res.send("Auth Failed").status(401);
+                res.send("Auth failed").status(401);
             }
         }
         
