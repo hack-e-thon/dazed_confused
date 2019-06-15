@@ -9,46 +9,6 @@ const jwt=require('jsonwebtoken');
 var upload = multer({dest: './public/upload'});
 
 
-// const storage = multer.diskStorage({
-//     destination: function(req, file, cb) {
-//       cb(null, './uploads/');
-//     },
-//     filename: function(req, file, cb) {
-//       cb(null, new Date().toISOString() + file.originalname);
-//     }
-//   });
-  
-//   const fileFilter = (req, file, cb) => {
-//     // reject a file
-//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-//       cb(null, true);
-//     } else {
-//       cb(null, false);
-//     }
-//   };
-  
-//   const upload = multer({
-//     storage: storage,
-//     // limits: {
-//     //   fileSize: 1024 * 1024 * 5
-//     // },
-//     fileFilter: fileFilter
-//   });
-  
-
-
-// var str="http://localhost:3000/"
-// //uploading photo
-// router.put('/',upload.single('hw'),function(req,res){
-//     mentorModel.findByIdAndUpdate(req.body.id, {$push:{hw:str+req.file.path}} ,  {new :true})
-//     .exec()
-//     .then((result)=>{
-//         res.json(result).status(200)
-//     })
-//     .catch(err=>{
-//         res.json(err).status(400)
-//     })
-// })
 
 router.post('/getmentor',function(req,res){
     
@@ -94,16 +54,27 @@ router.put('/newtimeslot',function(req,res){
 })
 
 
-
-    router.post('/',upload.single('profileimage'),function(req,res){
+    router.put('/uploadImage',upload.single('profileimage'),function(req,res){
         if(req.file){
             console.log('Uploading File....');
-            var profileimage = req.file.filename;
+            let profileimage = req.file.filename;
+            let id=req.body.mentorId
+            mentorModel.updateOne({_id:id},{$set:{profileimage:profileimage}})
+            .exec()
+            .then(mentor=>{
+                res.send(mentor)
+            })
+
         } else{
             console.log('No File Uploaded....');
-            var profileimage = 'noimage.jpg';
+            res.send("no image to upload")
         }
-    const newData= new mentorModel({
+    })
+
+
+    router.post('/',function(req,res){
+        
+        const newData= new mentorModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
         //age: req.body.age,
