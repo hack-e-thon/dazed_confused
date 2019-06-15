@@ -108,7 +108,7 @@ router.put('/updateEmail',function(req,res){
             userModel.updateOne({_id:id},{$set:{password:newPassword}})
             .exec()
             .then(data=>{
-                res.json(data).status(200);
+                res.send(data).status(200);
             })
         });
         
