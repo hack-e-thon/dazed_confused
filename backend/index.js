@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const port=3000;
 const app=express();
 const parser=require('body-parser');
+const multer = require('multer');
 const mongoose=require('mongoose');
 const users=require('./routes/users'); // userRoute path
 const mentors=require('./routes/mentors'); //Mentors path
@@ -23,6 +24,7 @@ mongoose.connect("mongodb+srv://Shivam:9691@cluster0-ezk1q.mongodb.net/test?retr
     }
 });
 
+app.use('/upload',express.static('upload'));
 app.use('*',function(req,res,next){
     res.set('Access-Control-Allow-Origin','*');
     res.set('Access-Control-Allow-Headers','content-type');
@@ -34,6 +36,12 @@ app.use('*',function(req,res,next){
 app.use('/users',users);
 app.use('/mentors',mentors);
 app.use('/appointments',appointments);
+// var cons = require('consolidate');
+// // view engine setup
+// app.engine('html', cons.swig)
+// app.set('./', path.join(__dirname, './'));
+// app.set('view engine', 'html');
+// app.set('view engine', pug);
 
 // app.get('/',function(req,res){
 //     res.send("connection working").status(200)

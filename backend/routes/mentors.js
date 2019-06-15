@@ -1,9 +1,54 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
+const multer = require('multer');
 const mentorModel=require('../models/mentorModel');
 const bcryptjs = require('bcryptjs'); // Encryption
 const jwt=require('jsonwebtoken');
+
+var upload = multer({dest: './public/upload'});
+
+
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//       cb(null, './uploads/');
+//     },
+//     filename: function(req, file, cb) {
+//       cb(null, new Date().toISOString() + file.originalname);
+//     }
+//   });
+  
+//   const fileFilter = (req, file, cb) => {
+//     // reject a file
+//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//       cb(null, true);
+//     } else {
+//       cb(null, false);
+//     }
+//   };
+  
+//   const upload = multer({
+//     storage: storage,
+//     // limits: {
+//     //   fileSize: 1024 * 1024 * 5
+//     // },
+//     fileFilter: fileFilter
+//   });
+  
+
+
+// var str="http://localhost:3000/"
+// //uploading photo
+// router.put('/',upload.single('hw'),function(req,res){
+//     mentorModel.findByIdAndUpdate(req.body.id, {$push:{hw:str+req.file.path}} ,  {new :true})
+//     .exec()
+//     .then((result)=>{
+//         res.json(result).status(200)
+//     })
+//     .catch(err=>{
+//         res.json(err).status(400)
+//     })
+// })
 
 router.post('/getmentor',function(req,res){
     
@@ -26,6 +71,14 @@ router.post('/timeSlot',function(req,res){
     .then(mentorData=>{
         res.json(mentorData).status(200)
     })
+}); 
+
+router.get('/',function(req,res){
+    mentorModel.find()
+    .exec()
+    .then(data=>{
+        res.json(data).status(200);
+    })
 });
    
 
@@ -40,8 +93,15 @@ router.put('/newtimeslot',function(req,res){
 })
 
 
-router.post('/',function(req,res){
 
+    router.post('/',upload.single('profileimage'),function(req,res){
+        if(req.file){
+            console.log('Uploading File....');
+            var profileimage = req.file.filename;
+        } else{
+            console.log('No File Uploaded....');
+            var profileimage = 'noimage.jpg';
+        }
     const newData= new mentorModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
@@ -52,6 +112,7 @@ router.post('/',function(req,res){
         //city: req.body.city,
         //gender: req.body.gender,
         contact: req.body.contact,
+        profileimage: profileimage
         //qualification: req.body.qualification
     });
     mentorModel.find({email:req.body.email})
