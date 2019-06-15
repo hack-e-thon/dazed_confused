@@ -172,7 +172,7 @@
                                                 </div>
                                                 <div>
                                                     <button type="button" class="block" onclick="previousAppointment()">Previous Appointments</button>
-                                                    <div id="ShowPrevAppointment">
+                                                    <div id="ShowPrevAppointment" style="display:none">
 
                                                     </div>
 
@@ -189,7 +189,8 @@
             </form>           
         </div>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js">
+        </script>
        
         <script src="./user.js">
         </script>
@@ -205,6 +206,7 @@
          </script>
         <script>
             var timeSlot
+            var appointmentflag=true;
                         function selectMentor()
                         {
                             let mentorSelected=document.querySelector('[name=mentor]:checked').value
@@ -293,7 +295,7 @@
                 })
             }
 
-
+            
         function addAppointment() {
             document.getElementById("myForm").style.display = "block";
           }
@@ -303,7 +305,15 @@
           }
         
           function previousAppointment() {
-            document.getElementById("ShowPrevAppointment").style.display = "block";
+              if(appointmentflag)
+            {
+                appointmentflag=false
+                document.getElementById("ShowPrevAppointment").style.display = "block";
+                }
+                else{
+                    appointmentflag=true;
+                    document.getElementById("ShowPrevAppointment").style.display = "none";
+                }
           }
           
           

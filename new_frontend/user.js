@@ -44,7 +44,7 @@ axios({
                     }
                 })
                 .then(function(resp){
-                    mname=resp.data[0].name
+                    mname=resp.data.name
                 console.log(resp)
                 let tr=document.createElement("tr")
                 let td=document.createElement("td")
