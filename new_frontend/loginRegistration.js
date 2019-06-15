@@ -1,4 +1,4 @@
-
+    
 function signup()
 {
     var name=document.forms["signupform"]["name"].value;

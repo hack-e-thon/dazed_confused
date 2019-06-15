@@ -15,11 +15,11 @@ router.post('/getuser',function(req,res){
     // s.send("User's Home").status(200);
     const id=req.body.userId
     console.log("asd",req.body)
-    userModel.find({_id:id})
+    userModel.findOne({_id:id})
     .exec()
     .then(userData=>{
     
-        res.json(userData).status(200)
+        res.send(userData).status(200)
     })
 });
 
@@ -108,7 +108,7 @@ router.put('/updateEmail',function(req,res){
             userModel.updateOne({_id:id},{$set:{password:newPassword}})
             .exec()
             .then(data=>{
-                res.json(data).status(200);
+                res.send(data).status(200);
             })
         });
         

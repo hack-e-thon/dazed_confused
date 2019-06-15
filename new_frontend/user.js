@@ -80,7 +80,7 @@ axios({
     
 })
 .then(function(res){
-    userDetails=res.data[0]
+    userDetails=res.data
     console.log("bharti")
     console.log(userDetails)
     

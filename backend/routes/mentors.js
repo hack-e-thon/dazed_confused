@@ -84,7 +84,8 @@ router.get('/',function(req,res){
 
 router.put('/newtimeslot',function(req,res){
     const id=req.body.mentorId
-    const time=new Date(req.body.timeSlot)
+    const time=(req.body.timeSlot)
+    console.log(req.body)
     mentorModel.updateOne({_id:id},{$push:{timeSlots:time}})
     .exec()
     .then(mentor=>{

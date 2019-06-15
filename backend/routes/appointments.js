@@ -36,6 +36,7 @@ router.post('/',function(req,res){
 
 router.put('/changeStatus',function(req,res){
     const appointmentId=req.body.appointmentId;
+    console.log(appointmentId)
     const status=true
     appointmentModel.updateOne({_id:appointmentId},{$set:{status:status}})
     .exec()
@@ -53,7 +54,7 @@ router.post('/mentorsRequestList',function(req,res){
     appointmentModel.find({mentorId:mentorId,status:false})
     .exec()
     .then(appointment=>{
-        res.json(appointment).status(200)
+        res.send(appointment).status(200)
     })
     .catch(err=>{
         res.send(err)

@@ -43,12 +43,15 @@
                                 <li class="nav-item">
                                         <a class="nav-link" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab" aria-controls="appointment" aria-selected="false">Appointments</a>
                                     </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" id="pendind-appointment-tab" data-toggle="tab" href="#pending-appointment" role="tab" aria-controls="pending-appointment" aria-selected="false">Pending Appointments</a>
+                                    </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
+                            <input type="button" class="profile-edit-btn" name="logout" value="Logout" onclick="Redirect()"/>
+                        </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -101,8 +104,8 @@
                                                 <div>
                                                     <button class="add-appointment" type="button" onclick="ShowMyTimeSlots()">My Time Slots</button><br>
                                                     
-                                                    <div id="timeSlots">
-                                                        <ul id="shoetimeslots">
+                                                    <div id="timeSlots" style="display: none">
+                                                        <ul id="showtimeslots">
 
                                                         </ul>
 
@@ -135,6 +138,14 @@
                     </div>
                 </div>
 
+
+                <div class="tab-pane fade"  role="tabpanel" id="pending-appointment" aria-labelledby="pending-appointment-tab">
+                    
+                   
+        </div>
+
+
+
                     </div>
                 </div>
             </form>           
@@ -147,6 +158,14 @@
 
 
         <script>
+            function Redirect() {
+                   localStorage.clear();
+                  window.location = "./loginuser.html";
+               }
+
+
+
+
             function prevAppontment(){
                 document.getElementById("appointments").style.display="block"
             }
@@ -155,13 +174,13 @@
                 axios({
                     method:'put',
                     url:'http:localhost:3000/mentors/newtimeslot',
-                    body:{
+                    data:{
                             mentorId:localStorage.getItem("mentorId"),
                             timeSlot:document.getElementById("time").value
                     }
                 })
                 .then(resp=>{
-                    console.log(resp)
+                    console.log("f**",resp)
                 })
             }
             function addtimeslot(){
