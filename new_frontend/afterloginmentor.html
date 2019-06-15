@@ -43,6 +43,9 @@
                                 <li class="nav-item">
                                         <a class="nav-link" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab" aria-controls="appointment" aria-selected="false">Appointments</a>
                                     </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" id="pendind-appointment-tab" data-toggle="tab" href="#pending-appointment" role="tab" aria-controls="pending-appointment" aria-selected="false">Pending Appointments</a>
+                                    </li>
                             </ul>
                         </div>
                     </div>
@@ -101,8 +104,8 @@
                                                 <div>
                                                     <button class="add-appointment" type="button" onclick="ShowMyTimeSlots()">My Time Slots</button><br>
                                                     
-                                                    <div id="timeSlots">
-                                                        <ul id="shoetimeslots">
+                                                    <div id="timeSlots" style="display: none">
+                                                        <ul id="showtimeslots">
 
                                                         </ul>
 
@@ -155,13 +158,13 @@
                 axios({
                     method:'put',
                     url:'http:localhost:3000/mentors/newtimeslot',
-                    body:{
+                    data:{
                             mentorId:localStorage.getItem("mentorId"),
                             timeSlot:document.getElementById("time").value
                     }
                 })
                 .then(resp=>{
-                    console.log(resp)
+                    console.log("f**",resp)
                 })
             }
             function addtimeslot(){

@@ -13,7 +13,7 @@ axios({
 })
 .then(function(res){
     mentorDetails=res.data
-    console.log("asd",mentorDetails)
+    console.log("asdzxc",mentorDetails)
     console.log()
     document.getElementById("name").innerText=mentorDetails.name;
     document.getElementById("name1").innerText=mentorDetails.name;
@@ -28,9 +28,12 @@ axios({
 
     var mentorTimeSlots=mentorDetails.timeSlots;
     let el=document.getElementById("showtimeslots")
+    console.log(mentorTimeSlots)
     mentorTimeSlots.forEach(element => {
         let li=document.createElement("li")
-        li.appendChild(document.createTextNode(mentorTimeSlots[i]))
+        let str=element.substring(0,10)
+        console.log("zxczxc",str)
+        li.appendChild(document.createTextNode(str))
         el.appendChild(li)
 
     });
