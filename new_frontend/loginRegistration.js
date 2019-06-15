@@ -130,15 +130,15 @@ function login()
                 if(response.data!=="Auth failed")
                 {
                     
-                    console.log("asd");
+                    console.log(response);
                     localStorage.setItem("token",response.data.token);
                     localStorage.setItem("mentorId",response.data.mentorId)
-                    window.location.href="./afterloginmentor.html"
+                    window.location.href="afterloginmentor.html"
                 
                 //userId=response.data.userId
                 //console.log(token)
                 //console.log(userId)
-                    window.location.href="./afterloginmentor.html"
+                   // window.location.href="./afterloginmentor.html"
                 
                 }
                 else

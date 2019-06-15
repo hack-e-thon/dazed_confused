@@ -20,16 +20,16 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="./images/person_3.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <!-- <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-6" style="margin-top: 1%; height:150px;">
                         <div class="profile-head">
-                                    <h5>
-                                        Kshiti Ghelani
+                                    <h5 id="name1">
+                                        
                                     </h5>
                                     <h6>
                                      Mentor for Course 1 (Laptop):
@@ -62,7 +62,7 @@
                                                 <label>Full Name : </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                                <p id="name"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -70,7 +70,7 @@
                                                 <label>Address : </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p id="address"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -78,7 +78,7 @@
                                                 <label>Email : </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p id="email"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -86,7 +86,7 @@
                                                 <label>Phone Number : </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p id="contact"></p>
                                             </div>
                                         </div>
                                         
@@ -99,24 +99,37 @@
                                     <div class="col-md-6">
                                             <div class="w3-container">
                                                 <div>
-                                                    <button class="add-appointment" onclick="addAppointment()">Add Free Time Slot</button><br>
-                                                    <div class="form-popup" id="myForm">
-                                                            <form action="/action_page.php" class="form-container">
-                                                             
-                                                          
-                                                              <label for="Date"><b>Date</b></label>
-                                                              <input type="text" placeholder="In yyyy/mm/dd format" name="email" required>
-                                                          
-                                                                                                                      
-                                                              <button type="submit" class="btn"style="margin:5px;text-align:center">Submit</button>
-                                                              <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
-                                                            </form>
-                                                          </div>
+                                                    <button class="add-appointment" type="button" onclick="ShowMyTimeSlots()">My Time Slots</button><br>
+                                                    
+                                                    <div id="timeSlots">
+                                                        <ul id="shoetimeslots">
+
+                                                        </ul>
+
+
+                                                    </div>
+
                                                 </div>
                                                 <div>
-                                                    <button class="block">Previous Appointments</button>
+                                                    <button type="button" class="block" onclick="prevAppontment()">Previous Appointments</button>
+                                                    <div id="appointments" style="display:none">
+                                                        <ul id="ul_appointments">
+
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                     </div>
+                                </div>
+                                <div class="col-md-3 offset-md-1">
+                                        <button type="button" onclick="addtimeslot()">
+                                                Add Time Slot
+                                            </button>
+                                            <div id="addtime" style="display: none">
+                                                <input type="text" id="time" placeholder="yyyy/mm//dd" style="width: 100px" value="">
+                                                <button type="button" onclick="addtime()">
+                                                    Add
+                                                </button>
+                                            </div>
                                 </div>
                                 
                     </div>
@@ -126,9 +139,36 @@
                 </div>
             </form>           
         </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+       
+        <script src="./mentor.js">
+        </script>
+
+
+
         <script>
-        function addAppointment() {
-            document.getElementById("myForm").style.display = "block";
+            function prevAppontment(){
+                document.getElementById("appointments").style.display="block"
+            }
+            function addtime(){
+                console.log(document.getElementById("time").value)
+                axios({
+                    method:'put',
+                    url:'http:localhost:3000/mentors/newtimeslot',
+                    body:{
+                            mentorId:localStorage.getItem("mentorId"),
+                            timeSlot:document.getElementById("time").value
+                    }
+                })
+                .then(resp=>{
+                    console.log(resp)
+                })
+            }
+            function addtimeslot(){
+                document.getElementById("addtime").style.display="block"
+            }
+        function ShowMyTimeSlots() {
+            document.getElementById("timeSlots").style.display = "block";
           }
           
           function closeForm() {
