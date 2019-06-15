@@ -8,7 +8,8 @@ const jwt=require('jsonwebtoken');
 router.post('/getmentor',function(req,res){
     
     const id=req.body.mentorId;
-    mentorModel.find({_id:id})
+    console.log("asd",req.body)
+    mentorModel.findOne({_id:id})
     .exec()
     .then(mentor=>{
         res.send(mentor).status(200);
@@ -30,11 +31,11 @@ router.post('/timeSlot',function(req,res){
 
 router.put('/newtimeslot',function(req,res){
     const id=req.body.mentorId
-    const time=req.body.timeSlot
+    const time=new Date(req.body.timeSlot)
     mentorModel.updateOne({_id:id},{$push:{timeSlots:time}})
     .exec()
     .then(mentor=>{
-        res.send("Success").status(200);
+        res.send(mentor).status(200);
     })
 })
 
@@ -70,6 +71,7 @@ router.post('/login',function(req,res){
     mentorModel.findOne({email:req.body.email})
     .exec()
     .then(mentor=>{
+        console.log(req.body)
         if(mentor==null)
         res.send("Auth failed").status(401);
         else
@@ -85,7 +87,8 @@ router.post('/login',function(req,res){
                 })
                 res.json({
                     "message":"Auth Successful",
-                    "token":token
+                    "token":token,
+                    "mentorId":mentor._id
                 }).status(200);
             }
             else{

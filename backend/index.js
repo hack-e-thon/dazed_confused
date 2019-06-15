@@ -26,6 +26,7 @@ mongoose.connect("mongodb+srv://Shivam:9691@cluster0-ezk1q.mongodb.net/test?retr
 app.use('*',function(req,res,next){
     res.set('Access-Control-Allow-Origin','*');
     res.set('Access-Control-Allow-Headers','content-type');
+    res.set("Access-Control-Allow-Methods",'*')
     next();
 });
 
