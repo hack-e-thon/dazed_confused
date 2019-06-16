@@ -13,7 +13,7 @@ const mentorSchema= mongoose.Schema({
     qualification: {type:String},
     rating:{type:Number},
     timeSlots:{type:[Date]},
-    profileimage:{type:String ,required:true} 
+    profileimage:{type:String } 
     
 });
 

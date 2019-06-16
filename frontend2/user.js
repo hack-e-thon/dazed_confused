@@ -10,6 +10,7 @@ var mentorsAvailable
 
 var previousAppointments
 
+
 axios({
     method:'post',
     url:'http://localhost:3000/appointments/user',
@@ -107,6 +108,10 @@ axios({
         le.appendChild((document.createElement("li")).appendChild(document.createTextNode("Stage "+i)) )
         le.appendChild(document.createElement("hr"))
         
+    }
+    if(userDetails.found)
+    {
+        alert("A mentor is available. Please re-enter your time-slot")
     }
 
 })

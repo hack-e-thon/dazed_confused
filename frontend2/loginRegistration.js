@@ -1,4 +1,5 @@
 
+
 function signup()
 {
     var name=document.forms["signupform"]["name"].value;
@@ -6,8 +7,12 @@ function signup()
     var address=document.forms["signupform"]["address"].value;
     var password=document.forms["signupform"]["password"].value;
     var contact=document.forms["signupform"]["contact"].value;
+    var age=document.forms["signupform"]["age"].value;
+    var city=document.forms["signupform"]["city"].value;
+    
     if(document.forms["signupform"]["userType"].value==="user")
     {
+        var stage=document.forms["signupform"]["initialstage"].value;
         
         // alert(document.forms["signupform"]["name"].value)
         axios({
@@ -18,14 +23,25 @@ function signup()
                 email:email,
                 password:password,
                 address:address,
-                //city:city,
+                city:city,
+                age:age,
+                stage:stage,
                 //gender:gender,
                 contact:contact
             }
         })
         .then(function(res){
             console.log(res)
-            window.location.href="./loginuser.html"
+            if(res.data!=="user already exists")
+            {
+                alert("User Created Successfully")
+                window.location.href="./loginuser.html"
+            }
+            else
+            {
+                alert("Please use a different email")
+            }
+            
         })
         .catch(function(err){
             console.log(err)
@@ -34,6 +50,8 @@ function signup()
     }
     if(document.forms["signupform"]["userType"].value==="mentor")
     {
+
+        var qualification=document.forms["signupform"]["qualification"].value;
         axios({
             method:'post',
             url:'http://localhost:3000/mentors',
@@ -42,13 +60,25 @@ function signup()
                 email:email,
                 password:password,
                 address:address,
-                //city:city,
+                city:city,
+                age:age,
+                qualification:qualification,
                 //gender:gender,
                 contact:contact
             }
         })
         .then(function(res){
-            window.location.href="./loginuser.html"
+
+            if(res.data!=="mentor already exists")
+            {
+                alert("Mentor Created Successfully")
+                window.location.href="./loginuser.html"
+            }
+            else
+            {
+                alert("Please enter a different email")
+            }
+            
             console.log("working")
             console.log(res)
         })

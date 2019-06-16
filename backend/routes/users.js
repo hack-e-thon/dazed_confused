@@ -37,15 +37,16 @@ router.post('/',function(req,res){
         password:bcryptjs.hashSync(req.body.password,10),
         address: req.body.address,
         city: req.body.city,
-        gender: req.body.gender,
+        //gender: req.body.gender,
         contact: req.body.contact,
         stage: req.body.stage
+        
     });
     userModel.find({email:req.body.email})
 .exec()
 .then(users=>{
     if(users.length>0){
-        res.send("User already exists").status(400);
+        res.send("user already exists").status(400);
     }
     else{
         newData.save();

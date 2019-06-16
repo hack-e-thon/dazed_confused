@@ -11,6 +11,8 @@ const userSchema= mongoose.Schema({
     contact: {type:Number,required:true},
     address: {type:String,required:true},
     stage: {type:Number,default:0},
+    timeSlot:{type:Date},
+    found:{type:Boolean,default:false}
 
 });
 

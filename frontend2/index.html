@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>OneSchool &mdash; Website by Colorlib</title>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -52,7 +52,6 @@
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
                 <li><a href="#courses-section" class="nav-link">Courses</a></li>
-              <li><a href="#teachers-section" class="nav-link">Teachers</a></li>
               </ul>
             </nav>
           </div>
@@ -85,10 +84,12 @@
                 </div>
 
                 <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                  <form name="signupform"  method="post" class="form-box">
+                  <form name="signupform"  method="post" class="form-box" id="formappend">
+                    <div id="div1">
+
                     <h3 class="h4 text-black mb-4">Sign Up</h3>
-                    <input type="radio" name="userType" value="user"> User
-                    <input type="radio" name="userType" value="mentor"> Mentor
+                    <input type="radio" name="userType" onclick="f1()" value="user"> User
+                    <input type="radio" name="userType" onclick="f2()" id="mentorchecked"value="mentor"> Mentor
                     </br>
                     </br>
                     <div class="form-group">
@@ -98,6 +99,14 @@
                       <input type="text" name="address" class="form-control" placeholder="Addresss">
                     </div>
                     <div class="form-group">
+                        <input type="text" name="age" class="form-control" placeholder="Age">
+                      </div>
+  
+                              <div class="form-group">
+                        <input type="text" name="city" class="form-control" placeholder="City">
+                      </div>
+  
+                    <div class="form-group">
                       <input type="number" name="contact" class="form-control" placeholder="Phone-Number">
                     </div>
                     <div class="form-group">
@@ -106,12 +115,19 @@
                     <div class="form-group">
                       <input type="password" name="password" class="form-control" placeholder="Password(min. 5 characters)" >
                     </div>
+
+
+                    </div>
+                    <div id="div2">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-pill" onclick="signup()" value="Sign up">Submit</button>
+                      </div>
+                    </div>
+                    
                     <!-- <div class="form-group mb-4">
                       <input type="password" name="password" class="form-control" placeholder="Re-type Password">
                     </div> -->
-                    <div class="form-group">
-                      <button type="button" class="btn btn-primary btn-pill" onclick="signup()" value="Sign up">Submit</button>
-                    </div>
+                   
                   </form>
 
                 </div>
@@ -201,6 +217,63 @@
 
 
      </div> <!-- .site-wrap -->
+     <script>
+       var boolform=false;
+     function f1(){
+      // <div class="form-group">
+      //                 <input type="text"  name="name" class="form-control" placeholder="Full Name">
+      //               </div>
+        
+        if(boolform)
+        {
+          let el=document.getElementById("div1");
+          el.removeChild(el.lastChild)
+            
+        }
+        else
+        {
+          boolform=true
+        }
+        
+        let di=document.createElement("div")
+        di.className="form-group"
+        let inp = document.createElement("input")
+        inp.type="text";
+        inp.name="initialstage"
+        inp.className="form-control"
+        inp.placeholder="Initial Stage"
+        di.appendChild(inp)
+        document.getElementById("div1").appendChild(di)
+        
+     }
+     function f2(){
+
+
+      if(boolform)
+        {
+          let el=document.getElementById("div1");
+          el.removeChild(el.lastChild)
+            
+        }
+        else
+        {
+          boolform=true
+        }
+
+        
+      let di=document.createElement("div")
+        di.className="form-group"
+        let inp = document.createElement("input")
+        inp.type="text";
+        inp.name="qualification"
+        inp.className="form-control"
+        inp.placeholder="Qualification"
+        di.appendChild(inp)
+        document.getElementById("div1").appendChild(di)
+
+     }
+     
+     </script>
 
      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
        

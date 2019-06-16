@@ -3,6 +3,7 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const multer = require('multer');
 const mentorModel=require('../models/mentorModel');
+const userModel=require('../models/userModel')
 const bcryptjs = require('bcryptjs'); // Encryption
 const jwt=require('jsonwebtoken');
 
@@ -31,6 +32,12 @@ router.post('/timeSlot',function(req,res){
     .then(mentorData=>{
         res.json(mentorData).status(200)
     })
+    userModel.updateOne({_id:req.body.userId},{$set:{timeSlot:timeSlot}})
+    .exec()
+    .then(resp=>{
+        res.send(resp).status(200)
+    })
+
 }); 
 
 router.get('/',function(req,res){
@@ -50,6 +57,21 @@ router.put('/newtimeslot',function(req,res){
     .exec()
     .then(mentor=>{
         res.send(mentor).status(200);
+    })
+    userModel.findOne({timeSlot:time})
+    .exec()
+    .then(resp=>{
+        if(resp.length>0)
+        {
+            userModel.updateOne({_id:resp._id},{$set:{found:true}})
+            .exec()
+            .then(found=>{
+                res.send(found)
+            })
+        }
+        else{
+
+        }
     })
 })
 
@@ -77,25 +99,25 @@ router.put('/newtimeslot',function(req,res){
         const newData= new mentorModel({
         _id: new mongoose.Types.ObjectId(),
         name :req.body.name,
-        //age: req.body.age,
+        age: req.body.age,
         email: req.body.email,
         password:bcryptjs.hashSync(req.body.password,10),
         address: req.body.address,
-        //city: req.body.city,
+        city: req.body.city,
         //gender: req.body.gender,
         contact: req.body.contact,
-        profileimage: profileimage
-        //qualification: req.body.qualification
+        
+        qualification: req.body.qualification
     });
     mentorModel.find({email:req.body.email})
     .exec()
     .then(mentor=>{
         if(mentor.length>0){
-            res.send("User already exists").status(400);
+            res.send("mentor already exists").status(400);
         }
         else{
             newData.save();
-            res.send("User created successfully").status(201);
+            res.send("mentor created successfully").status(201);
         }
     })
 })
