@@ -253,7 +253,7 @@
                                                               <input type="text" id="time" placeholder="In yyyy-mm-dd format" name="email" required>
                                                           
                                                                                                                       
-                                                              <button type="button" onclick="Appointment()"class="btn"style="margin:5px;text-align:center">Submit</button>
+                                                              <button type="button" id="once" onclick="Appointment()"class="btn"style="margin:5px;text-align:center">Submit</button>
                                                               <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
                                                               <ul id="appointments">
 
@@ -284,6 +284,10 @@
         </script>
        
         <script src="./user.js">
+            var flagbutton=true;
+
+
+
         </script>
         <script type = "text/javascript">
            
@@ -326,7 +330,10 @@
                             //alert("asd")
                         }
             function Appointment(){
-                timeSlot=document.getElementById("time").value
+                if(flagbutton)
+                {
+                    flagbutton=false
+                    timeSlot=document.getElementById("time").value
                 console.log(timeSlot)
                 document.getElementById("myForm").style.display = "block";
                 axios({
@@ -399,6 +406,13 @@
                 .catch(function(err){
                     console.log(err)
                 })
+                }
+                else
+                {
+
+
+                }
+                
             }
 
             

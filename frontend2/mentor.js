@@ -191,7 +191,8 @@ axios({
         .then(res=>{
             console.log("zxc",res)
             let li=document.createElement("li").appendChild(document.createTextNode(res.data.name))
-        document.getElementById("ul_appointments").appendChild(li)    
+        document.getElementById("ul_appointments").appendChild(li)
+        document.getElementById("ul_appointments").appendChild(document.createElement("br"))
         })
 
 
