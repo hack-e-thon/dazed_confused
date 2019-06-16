@@ -92,6 +92,7 @@ axios({
     document.getElementById("email").innerText=userDetails.email;
 
     document.getElementById("contact").innerText=userDetails.contact;
+    city=userDetails.contact;
     var stageReached=userDetails.stage
     var stage=document.getElementById("completedList")
     let i;

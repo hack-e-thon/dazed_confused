@@ -1,10 +1,11 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
+const multer = require('multer');
 const userModel=require('../models/userModel');
 const bcryptjs = require('bcryptjs'); // Encryption
 const jwt=require('jsonwebtoken');
-
+var upload = multer({dest: './public/upload'});
 
 
 // router.get('/'),function(req,res){
@@ -24,6 +25,30 @@ router.post('/getuser',function(req,res){
 });
 
 
+
+
+router.post('/imgupload',upload.single('profileimage'),function(req,res){
+    console.log("zxc",req)
+    if(req.file){
+        console.log('Uploading File....');
+        let profileimage = req.file.filename;
+        let id=req.body.userId
+        mentorModel.updateOne({_id:id},{$set:{profileimage:profileimage}})
+        .exec()
+        .then(user=>{
+            res.send(user)
+        })
+
+    } else{
+        console.log('No File Uploaded....');
+        res.send("no image to upload")
+    }
+})
+
+
+
+
+
    
 
 router.post('/',function(req,res){
@@ -40,7 +65,7 @@ router.post('/',function(req,res){
         //gender: req.body.gender,
         contact: req.body.contact,
         stage: req.body.stage
-        
+
     });
     userModel.find({email:req.body.email})
 .exec()

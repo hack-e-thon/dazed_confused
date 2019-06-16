@@ -79,7 +79,7 @@
                 <div class="row" style="height:150px;">
                     <div class="col-md-4">
                         <div class="profile-img">
-                                <img src="images/person_3.jpg" style="height: 175px;width: 200px"/>
+                                <img src="images/default.png" style="height: 175px;width: 200px"/>
 
                                 <div class="file btn btn-lg btn-primary">
                                         Change Photo
@@ -89,28 +89,40 @@
                                         <script>
                                         window.addEventListener('load', function() {
     document.querySelector('input[type="file"]').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            var img = document.querySelector('img');  // $('img')[0]
+       
+            var img= document.querySelector('img');  // $('img')[0]
             img.src = URL.createObjectURL(this.files[0]); // set src to file url
             img.onload = imageIsLoaded; // optional onload event listener
-            axios({
-                method:'post',
-                url:'url:http://localhost:3000/users/imgupload',
-                data:{
-                    userimage:img.onload,
-                    userId:localStorage.getItem("userId")
-                }
-            })
-            .then(resp=>{
-              console.log(resp)
+            console.log(this.files[0])
+            var dat=new FormData()
+            dat.append('file',this.files,'profileimage')
+            console.log(dat)
+
+            let request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:3000/users/imgupload');
+            request.send(dat);
+
+            // axios({
+            //     method:'post',
+            //     url:http://localhost:3000/users/imgupload',
+            //     config: { headers: {'Content-Type': 'multipart/form-data' }}
+            //     ,
+            //     data:dat
+                
+            // })
+            // .then(resp=>{
+            //   console.log(resp)
   
   
-            })
-        }
+            // })
+            // .catch(err=>{
+            //     console.log(err)
+            // })
+        
     });
   });
   
-  function imageIsLoaded(e) { alert("Image Changed Successfully!"); }
+  function imageIsLoaded(e) { alert(e); }
                                         
                                         </script>
   
@@ -281,6 +293,9 @@
         </div>
 
         <script src="https://unpkg.com/axios/dist/axios.min.js">
+
+
+var city
         </script>
        
         <script src="./user.js">
@@ -341,7 +356,8 @@
                     method:'post',
                     url:'http://localhost:3000/mentors/timeSlot',
                     data:{
-                        timeSlot:timeSlot
+                        timeSlot:timeSlot,
+                        city:city
                     }
                 })
                 .then(function(res){

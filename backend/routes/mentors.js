@@ -27,7 +27,7 @@ router.post('/timeSlot',function(req,res){
 
     const timeSlot=req.body.timeSlot
     console.log(timeSlot)
-    mentorModel.find({timeSlots:timeSlot})
+    mentorModel.find({timeSlots:timeSlot,city:req.body.city})
     .exec()
     .then(mentorData=>{
         res.json(mentorData).status(200)
