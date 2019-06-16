@@ -113,7 +113,7 @@
                       <input type="text" name="email"  class="form-control" placeholder="Email Addresss">
                     </div>
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control" placeholder="Password(min. 5 characters)" >
+                      <input type="password" name="password" class="form-control" placeholder="Password" >
                     </div>
 
 
@@ -238,10 +238,12 @@
         let di=document.createElement("div")
         di.className="form-group"
         let inp = document.createElement("input")
-        inp.type="text";
+        inp.type="number";
+        inp.min=0
+        inp.max=15
         inp.name="initialstage"
         inp.className="form-control"
-        inp.placeholder="Initial Stage"
+        inp.placeholder="Initial Stage (0-15)"
         di.appendChild(inp)
         document.getElementById("div1").appendChild(di)
         
