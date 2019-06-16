@@ -222,7 +222,7 @@
                                             </button>
                                             <div id="addtime" style="display: none">
                                                 <input type="text" id="time" placeholder="yyyy/mm//dd" style="width: 100px" value="">
-                                                <button type="button" onclick="addtime()">
+                                                <button  onclick="addtime()">
                                                     Add
                                                 </button>
                                             </div>
@@ -274,6 +274,7 @@
                 })
                 .then(resp=>{
                     console.log("f**",resp)
+                    window.location.reload();
                 })
             }
             function addtimeslot(){

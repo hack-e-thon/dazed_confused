@@ -250,7 +250,7 @@
                                                              
                                                           
                                                               <label for="Date"><b>Date</b></label>
-                                                              <input type="text" id="time" placeholder="In yyyy/mm/dd format" name="email" required>
+                                                              <input type="text" id="time" placeholder="In yyyy-mm-dd format" name="email" required>
                                                           
                                                                                                                       
                                                               <button type="button" onclick="Appointment()"class="btn"style="margin:5px;text-align:center">Submit</button>
@@ -296,6 +296,7 @@
             
          </script>
         <script>
+            var subflag=true;
             var timeSlot
             var appointmentflag=true;
                         function selectMentor()
@@ -315,12 +316,12 @@
                             })
                             .then(function(res){
                                 console.log(res)
+                                window.location.reload();
                             })
                             .catch(function(err){
                                 console.log(err)
                             })
 
-                            alert()
 
                             //alert("asd")
                         }
@@ -338,9 +339,9 @@
                 .then(function(res){
                     mentorsAvailable=res.data;
                     console.log("asd",res);
-
-                    
-                    const mypromise=new Promise(function(resolve,reject){
+                    if(mentorsAvailable.length>0)
+                    {
+                        const mypromise=new Promise(function(resolve,reject){
                         for(let i=0;i<mentorsAvailable.length;i++)
                         {
                         let list=document.createElement("li")
@@ -359,20 +360,34 @@
 
                         
                         resolve(1);
+                        })
+                    }
+                    else
+                    {
+                        subflag=false
+                        let list=document.createElement("li")
+                        list.appendChild(document.createTextNode("No Mentor available"))
+                        document.getElementById("appointments").appendChild(list)
+                    }
+
+                    
+                    
                     })
                     .then(response=>{
-                        
-                        var but=document.createElement("button")
+                        if(subflag)
+                        {
+                            var but=document.createElement("button")
                         but.setAttribute("onClick","selectMentor()")
                         but.innerText="Submit"
                         but.setAttribute("type","button")
                         document.getElementById("appointments").appendChild(but)
                         
                         console.log("vishal")
+                        }
+                        
                     })
                     
-                        
-                     })
+                       
 
 
                     
