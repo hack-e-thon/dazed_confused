@@ -64,7 +64,7 @@ router.post('/mentorsRequestList',function(req,res){
 router.post('/mentorList',function(req,res){
     console.log("asdasd",req.body)
     const mentorId=req.body.mentorId
-    appointmentModel.find({mentorId:mentorId})
+    appointmentModel.find({mentorId:mentorId,status:true})
     .exec()
     .then(appointment=>{
         res.send(appointment).status(200)
@@ -80,7 +80,7 @@ router.put('/giveRating',function(req,res){
     appointmentModel.updateOne({_id:id},{$set:{rating:rating}})
     .exec()
     .then(appointment=>{
-        res.json(appointment).status(200)
+        res.send(appointment).status(200)
         
         const mentorId=appointment.mentorId
         const totalusers=appointmentModel.find({mentorId:mentorId,rating:{ $exists:true }}).count()
@@ -101,10 +101,10 @@ router.put('/giveRating',function(req,res){
 
 router.post('/user',function(req,res){
     const userId=req.body.userId
-    appointmentModel.find({userId:userId})
+    appointmentModel.find({userId:userId,status:true})
     .exec()
     .then(appointment=>{
-        res.json(appointment).status(200)
+        res.send(appointment).status(200)
     })
     .catch(err=>{
         res.send(err)

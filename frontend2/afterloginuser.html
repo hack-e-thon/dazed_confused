@@ -295,7 +295,7 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js">
 
 
-var city
+
         </script>
        
         <script src="./user.js">
@@ -357,7 +357,7 @@ var city
                     url:'http://localhost:3000/mentors/timeSlot',
                     data:{
                         timeSlot:timeSlot,
-                        city:city
+                        city:localStorage.getItem("city")
                     }
                 })
                 .then(function(res){

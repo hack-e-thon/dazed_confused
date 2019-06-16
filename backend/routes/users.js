@@ -102,7 +102,7 @@ router.put('/updateEmail',function(req,res){
     userModel.updateOne({_id:id},{$set:{email:newEmail}})
     .exec()
     .then(data=>{
-        res.json(data).status(200);
+        res.send(data).status(200);
     })
 });
       //Updating the address of user with Id , note the path - do it likewise 
@@ -112,7 +112,7 @@ router.put('/updateEmail',function(req,res){
         userModel.updateOne({_id:id},{$set:{address:newAddress}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
 
@@ -123,7 +123,7 @@ router.put('/updateEmail',function(req,res){
         userModel.updateOne({_id:id},{$set:{contact:newContact}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
     
@@ -144,7 +144,7 @@ router.delete('/:userId',function(req,res){
     userModel.deleteOne({_id:id})
     .exec()
     .then(data=>{
-        res.json(data).status(200);
+        res.send(data).status(200);
     })
 });
 

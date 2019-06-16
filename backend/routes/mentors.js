@@ -26,17 +26,20 @@ router.post('/timeSlot',function(req,res){
     // res.send("mentor's Home").status(200);
 
     const timeSlot=req.body.timeSlot
-    console.log(timeSlot)
+    console.log(timeSlot,req.body.city)
     mentorModel.find({timeSlots:timeSlot,city:req.body.city})
     .exec()
     .then(mentorData=>{
-        res.json(mentorData).status(200)
+        res.send(mentorData).status(200)
     })
-    userModel.updateOne({_id:req.body.userId},{$set:{timeSlot:timeSlot}})
+    .then(re=>{
+        userModel.updateOne({_id:req.body.userId},{$set:{timeSlot:timeSlot}})
     .exec()
     .then(resp=>{
-        res.send(resp).status(200)
+        // res.send(resp).status(200)
     })
+    })
+    
 
 }); 
 
@@ -44,7 +47,7 @@ router.get('/',function(req,res){
     mentorModel.find()
     .exec()
     .then(data=>{
-        res.json(data).status(200);
+        res.send(data).status(200);
     })
 });
    
@@ -161,7 +164,7 @@ router.put('/updateEmail',function(req,res){
     mentorModel.updateOne({_id:id},{$set:{email:newEmail}})
     .exec()
     .then(data=>{
-        res.json(data).status(200);
+        res.send(data).status(200);
     })
 });
       //Updating the address of mentor with Id , note the path - do it likewise 
@@ -171,7 +174,7 @@ router.put('/updateEmail',function(req,res){
         mentorModel.updateOne({_id:id},{$set:{address:newAddress}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
     
@@ -182,7 +185,7 @@ router.put('/updateEmail',function(req,res){
         mentorModel.updateOne({_id:id},{$set:{qualification:newQualifaction}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
 
@@ -193,7 +196,7 @@ router.put('/updateEmail',function(req,res){
         mentorModel.updateOne({_id:id},{$set:{password:newPassword}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
     
@@ -205,7 +208,7 @@ router.put('/updateEmail',function(req,res){
         mentorModel.updateOne({_id:id},{$set:{contact:newContact}})
         .exec()
         .then(data=>{
-            res.json(data).status(200);
+            res.send(data).status(200);
         })
     });
     
@@ -216,7 +219,7 @@ router.delete('/:mentorId',function(req,res){
     mentorModel.deleteOne({_id:id})
     .exec()
     .then(data=>{
-        res.json(data).status(200);
+        res.send(data).status(200);
     })
 });
 
